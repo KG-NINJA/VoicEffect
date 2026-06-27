@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Voicefect - 録音音声加工</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="title">
+        <div>
+          <p class="eyebrow">Browser-only voice effects</p>
+          <h1 id="title">録音した声を、その場で加工。</h1>
+          <p class="lead">
+            音声は外部送信されません。録音後にブラウザ内で加工して再生・ダウンロードできます。
+          </p>
+        </div>
+        <div class="status-card" aria-live="polite">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="statusText">準備中</span>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls" aria-label="録音操作">
+          <button id="recordButton" class="primary" type="button">録音開始</button>
+          <button id="stopButton" type="button" disabled>停止</button>
+        </div>
+        <p class="hint">ハウリング防止のため、録音中は再生ボタンを無効化します。イヤホン推奨。</p>
+        <p id="timer" class="timer" aria-live="polite">00:00</p>
+        <p id="message" class="message" role="status"></p>
+      </section>
+
+      <section class="grid">
+        <article class="panel">
+          <h2>元音声</h2>
+          <audio id="originalAudio" controls preload="metadata"></audio>
+          <button id="playOriginalButton" type="button" disabled>元音声を再生</button>
+        </article>
+
+        <article class="panel">
+          <h2>加工プリセット</h2>
+          <label class="select-label" for="presetSelect">効果を選択</label>
+          <select id="presetSelect">
+            <option value="low">低い声</option>
+            <option value="high">高い声</option>
+            <option value="robot">ロボット風</option>
+            <option value="echo">エコー</option>
+            <option value="radio">ラジオ風</option>
+            <option value="reverse">逆再生</option>
+          </select>
+          <div class="button-row">
+            <button id="processButton" type="button" disabled>加工する</button>
+            <button id="playProcessedButton" type="button" disabled>加工音声を再生</button>
+          </div>
+          <audio id="processedAudio" controls preload="metadata"></audio>
+          <a id="downloadLink" class="download disabled" aria-disabled="true">加工後音声をダウンロード</a>
+        </article>
+      </section>
+
+      <section class="notice">
+        <h2>動作条件</h2>
+        <ul>
+          <li>HTTPS または localhost で動作します。</li>
+          <li>MediaRecorder と Web Audio API に対応したブラウザが必要です。</li>
+          <li>Safari は録音形式や再生形式の対応が環境により異なります。</li>
+        </ul>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
